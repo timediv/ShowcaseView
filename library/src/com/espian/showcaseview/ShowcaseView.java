@@ -537,6 +537,9 @@ public class ShowcaseView extends RelativeLayout
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
+    	if(mOptions.blockAll)
+    		return true;
+    	
     	boolean outside = false;
     	if(mOptions.clingShape == SHAPE_CIRCLE) {
 	        float xDelta = Math.abs(motionEvent.getRawX() - showcaseX);
@@ -843,6 +846,11 @@ public class ShowcaseView extends RelativeLayout
          * Cling shape to draw
          */
         public int clingShape = SHAPE_CIRCLE;
+        
+        /**
+         * Blocks every touch except for the button press
+         */
+        public boolean blockAll = false;
     }
 
 }
