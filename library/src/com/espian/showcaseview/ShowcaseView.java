@@ -587,11 +587,11 @@ public class ShowcaseView extends RelativeLayout
     }
 
     /**
-     * Get the ghostly gesture hand for custom gestures
+     * Create the ghostly gesture hand for custom gestures
      *
      * @return a View representing the ghostly hand
      */
-    public View getHand() {
+    private View createHand() {
         final View mHandy = ((LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.handy, null);
         addView(mHandy);
@@ -599,6 +599,15 @@ public class ShowcaseView extends RelativeLayout
 
         return mHandy;
     }
+    
+    /**
+     * Get the ghostly gesture hand for custom gestures
+     *
+     * @return a View representing the ghostly hand
+     */
+    public View getHand() {
+		return mHandy;
+	}
 
     /**
      * Point to a specific view
@@ -618,7 +627,7 @@ public class ShowcaseView extends RelativeLayout
      * @param y Y-coordinate to point to
      */
     public void pointTo(float x, float y) {
-        mHandy = getHand();
+        mHandy = createHand();
         AnimationUtils.createMovementAnimation(mHandy, x, y).start();
     }
 

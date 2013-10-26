@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
+import android.view.View;
 
 /**
  * Draws the text as required by the ShowcaseView
@@ -100,6 +101,20 @@ public class TextDrawerImpl implements TextDrawer {
     public void calculateTextPosition(int canvasW, int canvasH, ShowcaseView showcaseView) {
 
     	Rect showcase = mCalculator.getShowcaseRect();
+    	
+    	View hand = showcaseView.getHand();
+    	if(hand != null) {
+	    	int[] handLocation = new int[2];
+	    	hand.getLocationInWindow(handLocation);
+	    	
+	    	Rect handRect = new Rect(
+	    			handLocation[0],
+	    			handLocation[1],
+	    			handLocation[0] + hand.getWidth(),
+	    			handLocation[1] + hand.getHeight()
+	    		);
+	    	showcase.union(handRect);
+    	}
     	
     	int[] areas = new int[4]; //left, top, right, bottom
     	areas[0] = showcase.left * canvasH;
