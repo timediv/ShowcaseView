@@ -635,7 +635,7 @@ public class ShowcaseView extends RelativeLayout
         mOptions = options;
     }
 
-    protected ConfigOptions getConfigOptions() {
+    public ConfigOptions getConfigOptions() {
         // Make sure that this method never returns null
         if (mOptions == null) {
             return mOptions = new ConfigOptions();
@@ -859,6 +859,11 @@ public class ShowcaseView extends RelativeLayout
          * Blocks every touch except for the button press
          */
         public boolean blockAll = false;
+        
+        /**
+         * Whether the text should be centered or stretched in the available space
+         */
+        public boolean centerText = false;
     }
 
 }
