@@ -20,6 +20,7 @@ import android.view.View;
 public class TextDrawerImpl implements TextDrawer {
 	
 	private static final int PADDING = 24;
+	private static final int ACTIONBAR_PADDING = 100;
 
     private final TextPaint mPaintTitle;
     private final TextPaint mPaintDetail;
@@ -128,6 +129,7 @@ public class TextDrawerImpl implements TextDrawer {
     			largest = i;
     	}
     	
+    	// Position text in largest area
     	switch(largest) {
     	case 0:
     		mBestTextPosition[0] = PADDING * mDensityScale;
@@ -136,7 +138,7 @@ public class TextDrawerImpl implements TextDrawer {
     		break;
     	case 1:
     		mBestTextPosition[0] = PADDING * mDensityScale;
-    		mBestTextPosition[1] = PADDING * mDensityScale;
+    		mBestTextPosition[1] = ACTIONBAR_PADDING * mDensityScale;
     		mBestTextPosition[2] = canvasW - 2 * PADDING * mDensityScale;
     		break;
     	case 2:
@@ -150,15 +152,16 @@ public class TextDrawerImpl implements TextDrawer {
     		mBestTextPosition[2] = canvasW - 2 * PADDING * mDensityScale;
     		break;
     	}
+    	// Center text vertically or horizontally
     	switch(largest) {
     	case 0:
     	case 2:
-    		mBestTextPosition[1] += canvasH / 3;
+    		mBestTextPosition[1] += canvasH / 4;
     		break;
     	case 1:
     	case 3:
-    		mBestTextPosition[2] /= 3;
-    		mBestTextPosition[0] += canvasW / 3;
+    		mBestTextPosition[2] /= 2;
+    		mBestTextPosition[0] += canvasW / 4;
     		break;
     	}
 
