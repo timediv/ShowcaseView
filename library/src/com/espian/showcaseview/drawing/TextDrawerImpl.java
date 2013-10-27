@@ -101,7 +101,9 @@ public class TextDrawerImpl implements TextDrawer {
     @Override
     public void calculateTextPosition(int canvasW, int canvasH, ShowcaseView showcaseView) {
 
-    	Rect showcase = mCalculator.getShowcaseRect();
+    	Rect showcase = showcaseView.hasShowcaseView() ?
+    			mCalculator.getShowcaseRect() :
+    			null;
     	
     	View hand = showcaseView.getHand();
     	if(hand != null) {
@@ -114,7 +116,12 @@ public class TextDrawerImpl implements TextDrawer {
 	    			handLocation[0] + hand.getWidth(),
 	    			handLocation[1] + hand.getHeight()
 	    		);
-	    	showcase.union(handRect);
+	    	if(showcase != null)
+	    		showcase.union(handRect);
+	    	else
+	    		showcase = handRect;
+    	} else if(showcase == null) {
+    		showcase = new Rect();
     	}
     	
     	int[] areas = new int[4]; //left, top, right, bottom
